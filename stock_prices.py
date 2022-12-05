@@ -22,11 +22,23 @@ def get_stock(ticker, years_back=5):
         csv_name = ticker + '.csv'
         stock_df.to_csv(csv_name)
 
-        success_tickers.append(ticker)
+        success_flag = True 
         print(f'{ticker} - SUCCESS')
 
     except:
-        failed_tickers.append(ticker)
+        success_flag = False
         print(f'{ticker} - STOCK NOT FOUND')
+
+    return success_flag
+
+def get_stocks(tickers_list):
+    success_tickers, failed_tickers = [], []
+
+    for ticker in tickers_list:
+        success_flag = get_stock(ticker)
+        if success_tickers:
+            success_tickers.append(ticker)
+        else:
+            failed_tickers.append(ticker)
 
     return success_tickers, failed_tickers
