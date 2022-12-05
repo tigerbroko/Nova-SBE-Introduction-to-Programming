@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 import re
-
+#import yfinance
 
 def load_tickers(location):
     tickers = pd.read_csv(location, sep = ",")
