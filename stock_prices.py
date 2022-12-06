@@ -3,11 +3,7 @@ import pandas as pd
 from datetime import datetime
 from concurrent import futures
 from pandas_datareader.data import DataReader
-import argparse
-
-# adding the option to select parameter for years
-parser = argparse.ArgumentParser()
-parser.add_argument("--years_back", default=8, type=int, help="How many years for analysis.")
+import time
 
 def get_stock(ticker, years_back=5):
     today = datetime.now()
@@ -32,13 +28,24 @@ def get_stock(ticker, years_back=5):
     return success_flag
 
 def get_stocks(tickers_list):
+    starting_time = time.time()
     success_tickers, failed_tickers = [], []
 
     for ticker in tickers_list:
         success_flag = get_stock(ticker)
-        if success_tickers:
+        if success_flag:
             success_tickers.append(ticker)
         else:
             failed_tickers.append(ticker)
-
+    elapsed_time = time.time() - starting_time
+    print('Elapsed time:', round(elapsed_time,3) , 'seconds.')
     return success_tickers, failed_tickers
+
+def load_stocks(tickers_list):
+    stocks_df_list = []
+    for ticker in tickers_list:
+        csv_name = ticker + '.csv'
+        df = pd.read_csv(csv_name)
+        stocks_df_list.append(df)
+    
+    return stocks_df_list
