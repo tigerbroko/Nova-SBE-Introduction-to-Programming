@@ -1,9 +1,9 @@
-import numpy as np
 import pandas as pd
 from datetime import datetime
-from concurrent import futures
 from pandas_datareader.data import DataReader
 import time
+# import numpy as np
+# from concurrent import futures
 
 def get_stock(ticker, years_back=5):
     today = datetime.now()
