@@ -49,3 +49,4 @@ def load_stocks(tickers_list):
         stocks_df_list.append(df)
     
     return stocks_df_list
+
