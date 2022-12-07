@@ -50,3 +50,16 @@ def load_stocks(tickers_list):
     
     return stocks_df_list
 
+def get_close_prices(stocks_df_list, success_tickers):
+    df_close_prices = stocks_df_list[0][['Date','Adj Close']]
+ 
+    for index in range(1, len(stocks_df_list)):
+        dataframe = stocks_df_list[index][['Date','Adj Close']]
+        df_close_prices = df_close_prices.merge(dataframe, on='Date', how = 'inner')
+
+    cp_columns_names = ['Date']
+    cp_columns_names.extend(success_tickers)
+    df_close_prices.columns = cp_columns_names
+    df_close_prices.set_index('Date', inplace=True)
+
+    return df_close_prices
