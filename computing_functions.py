@@ -49,6 +49,7 @@ def size_betas(excess_returns, size):
     column = 0
     for stock in excess_returns.columns:
         for row in range(len(excess_returns[stock])-253):
+            # print(f'stock:{stock}, row: {row}')
             y = excess_returns.iloc[row:(row + 253), :]
             y = y.loc[:, stock].values.reshape(-1, 1)
             x = size.iloc[row:(row + 253), :]
