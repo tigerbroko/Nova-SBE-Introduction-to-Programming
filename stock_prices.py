@@ -63,3 +63,8 @@ def get_close_prices(stocks_df_list, success_tickers):
     df_close_prices.set_index('Date', inplace=True)
 
     return df_close_prices
+
+def daily_to_monthly(df):
+    df.index = pd.to_datetime(df.index)
+    monthly_df = df.resample('1M').mean()
+    return monthly_df
