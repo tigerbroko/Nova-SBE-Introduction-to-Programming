@@ -5,7 +5,7 @@ import time
 # import numpy as np
 # from concurrent import futures
 
-def get_stock(ticker, years_back=5):
+def get_stock(ticker, years_back=13):
     today = datetime.now()
     start = datetime((today.year-years_back), today.month, today.day)
     end = today # could be changed if other range is desired
