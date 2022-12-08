@@ -1,9 +1,11 @@
 from sklearn.linear_model import LinearRegression
 import pandas as pd
 import numpy as np
-
+import time
 
 def market_betas(excess_returns, market):
+    starting_time = time.time()
+
     excess_returns_index = excess_returns.index.copy()
     excess_returns.reset_index(inplace=True)
     excess_returns.drop(['Date'], axis=1, inplace=True)
@@ -28,4 +30,7 @@ def market_betas(excess_returns, market):
     betas.set_index(excess_returns_index, inplace=True)
 
     betas = betas.iloc[253:, :] # cutting off NAs
+    
+    elapsed_time = time.time() - starting_time
+    print('Elapsed time:', round(elapsed_time,3) , 'seconds.')
     return betas
